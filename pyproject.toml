@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "fastapi-with-redis"
+version = "0.1.0"
+description = ""
+authors = ["jabertuhin"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.67.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
