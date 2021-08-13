@@ -1,11 +1,9 @@
 # Tutorial: https://makefiletutorial.com/#top
+# command: gunicorn app.main:app -b $(HOST):$(PORT) -w $(WORKER_NUM) -k uvicorn.workers.UvicornWorker --access-logfile -
 
-WORKER_NUM = 2
-PORT = 8080
-HOST = 0.0.0.0
 
 server:
-	  gunicorn app.main:app -b $(HOST):$(PORT) -w $(WORKER_NUM) -k uvicorn.workers.UvicornWorker
+	  gunicorn app.main:app -c gunicorn_config.py
 
 dev_setup:
 	 pip install -r requirements.dev.txt
