@@ -11,11 +11,12 @@ class RedisConnector(Connector):
     def __init__(self) -> None:
         super().__init__()
         self.host = ConfigFileParser.get_config_section("redis")["host"]        
+        self.port = ConfigFileParser.get_config_section("redis")["port"]
 
     async def __aenter__(self):
         try:
             logger.info(f"Connecting to Redis server, host: {self.host}")
-            self.redis = await aioredis.create_redis_pool(self.host)
+            self.redis = await aioredis.create_redis_pool(f"{self.host}:{self.port}", encoding="utf-8")
             return self.redis
         except Exception as exception:
             logger.exception(exception)
