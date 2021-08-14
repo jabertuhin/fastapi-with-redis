@@ -1,6 +1,13 @@
 # Description
 A pdf parsing web application. [ Deatils will be added as I go with the development. ]
 
+> NOTE: Still a lot of work needs to be done to complete this project. Such as -
+- writing tests to achieve good coverage.
+- having meaningful work done by endpoints.
+- storing api-keys in postgresql.
+- kubernetes deployment.
+
+
 ## Update: 14th August, 2021
 API Rate Limit Feature Added.
 
