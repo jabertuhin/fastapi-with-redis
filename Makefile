@@ -1,5 +1,4 @@
 # Tutorial: https://makefiletutorial.com/#top
-# command: gunicorn app.main:app -b $(HOST):$(PORT) -w $(WORKER_NUM) -k uvicorn.workers.UvicornWorker --access-logfile -
 
 
 server:
@@ -10,3 +9,6 @@ dev_setup:
 
 test:
 	pytest
+
+html_test_coverage:
+	pytest --cov-report html --cov=app tests/

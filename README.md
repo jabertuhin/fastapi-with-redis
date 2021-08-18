@@ -7,7 +7,6 @@ A pdf parsing web application. [ Deatils will be added as I go with the developm
 - storing api-keys in postgresql.
 - kubernetes deployment.
 
-
 ## Update: 14th August, 2021
 API Rate Limit Feature Added.
 
