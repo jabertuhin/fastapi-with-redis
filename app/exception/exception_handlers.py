@@ -24,7 +24,7 @@ def service_exception_handler(request: Request, exc: ServiceException):
 
 
 
-def add_exception_in_handler(app: FastAPI) -> NoReturn:
+def add_exception_in_handler(app: FastAPI) -> None:
     # add custom exceptions
     for custom_exception in custom_exceptions:
         app.add_exception_handler(custom_exception, custom_exception_handler)
