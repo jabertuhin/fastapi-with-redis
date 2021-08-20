@@ -1,7 +1,7 @@
 import logging
 
 import configparser
-from typing import Dict, NoReturn, Union
+from typing import Dict, Union
 
 from app import ROOT_DIR
 
@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class ConfigFileParser:        
     @staticmethod
-    def setup_config(file_name: str) -> NoReturn:        
+    def setup_config(file_name: str) -> None:        
         config_file_path =  ROOT_DIR / file_name
         logger.debug(f"Setting config file path. FilePath: {config_file_path}")
         ConfigFileParser.config_parser = configparser.ConfigParser()
