@@ -15,14 +15,15 @@ class RedisServerClient(CacheServerClient):
         super().__init__()
         self.connector = connector   
 
-    async def set_key_value(self, key: str, value: int = 1, expires_in_second: int = 60)-> NoReturn:
+    async def set_key_value_with_expiry_time(self, key: str, value: int = 1, expires_in_second: int = 60)-> NoReturn:
         async with self.connector as redis:                        
+            logger.debug("Setting key-value in redis.")
             await redis.set(key, value, expire=expires_in_second)
 
     async def get_value_by_key(self, key: str)-> str:
         try:
             async with self.connector as redis:                
-                logger.info(f"Getting value from redis by key.")
+                logger.debug("Getting value from redis by key.")
                 value = await redis.get(key)                            
             return value
         except Exception as excep:
@@ -31,5 +32,10 @@ class RedisServerClient(CacheServerClient):
 
     async def increment_value_by_key(self, key: str)-> NoReturn:
         async with self.connector as redis:
-            logger.info("Incrementing key's value in Redis.")            
+            logger.debug("Incrementing key's value in Redis.")            
             await redis.incr(key)
+
+    async def key_exists(self, key: str) -> int:
+        async with self.connector as redis:
+            logger.debug("Checking if key exists in Redis.")
+            return await redis.exists(key)

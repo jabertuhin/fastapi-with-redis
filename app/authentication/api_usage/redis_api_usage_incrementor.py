@@ -26,9 +26,9 @@ class RedisApiUsageIncrementor(ApiUsageIncrementor):
 
         if key_existence == 0:
             logger.debug(f"Setting key with default value 1 in Redis.")
-            await self._cache_server.set_key_value(key=user_api_key_with_time,                                                
-                                                value=1,
-                                                expires_in_second=self._api_rate_limit_time)
+            await self._cache_server.set_key_value_with_expiry_time(key=user_api_key_with_time,                                                
+                                                                value=1,
+                                                                expires_in_second=self._api_rate_limit_time)
             return                                            
 
         logger.debug(f"Incrementing key value.")
