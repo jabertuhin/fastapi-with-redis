@@ -27,7 +27,7 @@ class DummyAuthenticator(APIKeyAuthenticator):
     async def authenticate(self, api_key: str) -> None:
         if api_key is None:
             raise AuthenticationException(status_code=status.HTTP_401_UNAUTHORIZED,
-                                        message=ExceptionMessage.UNAUTHORIZED_EXCEPTION)
+                                        message=ExceptionMessage.UNAUTHORIZED_ERROR)
 
         user_api_key_with_time = get_api_key_with_time(api_key, self._api_rate_limit_time)
         api_usage_count = await self._cache_server.get_value_by_key(user_api_key_with_time)        
@@ -46,4 +46,4 @@ class DummyAuthenticator(APIKeyAuthenticator):
         logger.debug("Verifying API-key.")
         if api_key not in DummyAuthenticator.__allowed_api_keys:
             raise AuthenticationException(status_code=status.HTTP_401_UNAUTHORIZED,
-                                        message=ExceptionMessage.UNAUTHORIZED_EXCEPTION)
+                                        message=ExceptionMessage.UNAUTHORIZED_ERROR)
