@@ -10,7 +10,7 @@ A pdf parsing web application. [ Deatils will be added as I go with the developm
 ## Update: 14th August, 2021
 API Rate Limit Feature Added.
 
-**Details:** `/pdf/extract` endpoint can be access via a valid API_KEY. A user with valid API_KEY can access this endpoint 20 times per second. If he crosses the limit, he won't be able to access the endpoint any longer and have to wait for next term.
+**Details:** `/pdf/extract` endpoint can be access via a valid API_KEY. A user with valid API_KEY can access this endpoint 20 times per minute. If he crosses the limit, he won't be able to access the endpoint any longer and have to wait for the next term.
 
 **feature specific branch:** `task/jabertuhin/api-rate-limiter-with-redis`
 
