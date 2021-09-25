@@ -23,8 +23,8 @@ API_KEY_HEADER = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 async def authenticate_and_increment_api_key_usage(api_key: str = Security(API_KEY_HEADER),
                             authenticator: APIKeyAuthenticator = Depends(DummyAuthenticator),
                             api_usage_incrementor: ApiUsageIncrementor = Depends(RedisApiUsageIncrementor)) -> None:
-    try:                            
-        await authenticator.authenticate(api_key)        
+    try:
+        await authenticator.authenticate(api_key)
         await api_usage_incrementor.increment(api_key)
     except AuthenticationException as excep:
         logger.exception(excep)

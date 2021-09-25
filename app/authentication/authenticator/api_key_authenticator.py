@@ -3,5 +3,5 @@ from typing import NoReturn
 
 
 class APIKeyAuthenticator(ABC):
-    async def authenticate(api_key: str) -> None:
+    async def authenticate(self, api_key: str) -> None:
         raise NotImplementedError()

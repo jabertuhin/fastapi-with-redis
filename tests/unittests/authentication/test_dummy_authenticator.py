@@ -8,17 +8,17 @@ from app.authentication.authenticator.dummy_api_authenticator import DummyAuthen
 
 
 class TestDummyAuthenticator(IsolatedAsyncioTestCase):
-    
+
     @patch.object(ConfigFileParser, 'get_config_section')
     async def test_authenticate_when_api_key_is_none_should_raise_AuthenticationException(self,
                                                                                         mock_config_section):
         mock_config_section.side_effect = [{"limit": 20}, {"second": 60}]
         api_key = None
-        
-        cache_server_client = AsyncMock(wraps=CacheServerClient)        
 
-        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)               
-        
+        cache_server_client = AsyncMock(wraps=CacheServerClient)
+
+        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)
+
         with self.assertRaises(AuthenticationException) as excep:
             _ = await dummy_authenticator.authenticate(api_key=api_key)
 
@@ -37,8 +37,8 @@ class TestDummyAuthenticator(IsolatedAsyncioTestCase):
         cache_server_client = AsyncMock(wraps=CacheServerClient)
         cache_server_client.get_value_by_key.return_value = None
 
-        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)               
-        
+        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)
+
         with self.assertRaises(AuthenticationException) as excep:
             _ = await dummy_authenticator.authenticate(api_key=api_key)
 
@@ -57,8 +57,8 @@ class TestDummyAuthenticator(IsolatedAsyncioTestCase):
         cache_server_client = AsyncMock(wraps=CacheServerClient)
         cache_server_client.get_value_by_key.return_value = None
 
-        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)               
-                
+        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)
+
         actual = await dummy_authenticator.authenticate(api_key=api_key)
 
         self.assertIsNone(actual)
@@ -77,8 +77,8 @@ class TestDummyAuthenticator(IsolatedAsyncioTestCase):
         cache_server_client = AsyncMock(wraps=CacheServerClient)
         cache_server_client.get_value_by_key.return_value = b'9'
 
-        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)               
-                
+        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)
+
         actual = await dummy_authenticator.authenticate(api_key=api_key)
 
         self.assertIsNone(actual)
@@ -94,9 +94,9 @@ class TestDummyAuthenticator(IsolatedAsyncioTestCase):
         api_key = "x189-0sf0"
         mock_get_api_key_with_time.return_value = f"{api_key}:2"
         cache_server_client = AsyncMock(wraps=CacheServerClient)
-        cache_server_client.get_value_by_key.return_value = b'20'                
+        cache_server_client.get_value_by_key.return_value = b'20'
 
-        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)                
+        dummy_authenticator = DummyAuthenticator(cache_server=cache_server_client)
 
         with self.assertRaises(AuthenticationException) as excep:
             _ = await dummy_authenticator.authenticate(api_key=api_key)
@@ -105,4 +105,3 @@ class TestDummyAuthenticator(IsolatedAsyncioTestCase):
         self.assertEqual(403, excep.exception.status_code)
 
         cache_server_client.get_value_by_key.assert_awaited_once()
-        
