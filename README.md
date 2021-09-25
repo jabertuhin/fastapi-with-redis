@@ -52,7 +52,7 @@ In the top right corner, you will see a **Authorize** button, and clicking it wi
 
 ![](authorize-with-apikey.png)
 
-Provide valid api-key to get successful response, and to check authentication you can provide random api-keys. 
+Provide valid api-key to get successful response, and to check authentication you can provide random api-keys.
 
 > NOTE: This api-key checking is a dummy implementation.
 
@@ -70,6 +70,10 @@ Provide valid api-key to get successful response, and to check authentication yo
 - [Schema migrations with Alembic, Python and PostgreSQL](https://www.compose.com/articles/schema-migrations-with-alembic-python-and-postgresql/)
 - [Using PostgreSQL through SQLAlchemy](https://www.compose.com/articles/using-postgresql-through-sqlalchemy/)
 - [Async SQL (Relational) Databases](https://fastapi.tiangolo.com/advanced/async-sql-databases/)
+
+-----
+
+- [hooking fastapi endpoints up to a postgres database](https://www.jeffastor.com/blog/hooking-fastapi-endpoints-up-to-a-postgres-database)
 
 ### Redis
 - [aioredis — API Reference](https://aioredis.readthedocs.io/en/v1.3.0/api_reference.html)

@@ -18,7 +18,8 @@ add_exception_in_handler(app)
 
 # including router in the app
 app.include_router(health.router)
-app.include_router(process_pdf.router, dependencies=[Depends(authenticate_and_increment_api_key_usage)])
+app.include_router(process_pdf.router,
+                   dependencies=[Depends(authenticate_and_increment_api_key_usage)])
 
 
 # Setting config file parser

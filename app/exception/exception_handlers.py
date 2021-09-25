@@ -1,5 +1,3 @@
-from typing import NoReturn
-
 from fastapi.applications import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.requests import Request
@@ -13,15 +11,14 @@ from app.exception.base_exception import BaseException
 custom_exceptions = [AuthenticationException]
 
 
-def custom_exception_handler(request: Request, exc: BaseException):
+def custom_exception_handler(request: Request, exc: BaseException) -> JSONResponse:
     return JSONResponse(status_code=exc.status_code,
                         content={"message": exc.message})
 
 
-def service_exception_handler(request: Request, exc: ServiceException):
+def service_exception_handler(request: Request, exc: ServiceException) -> JSONResponse:
     return JSONResponse(status_code=exc.status_code,
                         content={"message": exc.message})
-
 
 
 def add_exception_in_handler(app: FastAPI) -> None:

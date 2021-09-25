@@ -9,10 +9,10 @@ from app.authentication.api_usage.redis_api_usage_incrementor import RedisApiUsa
 class TestRedisApiUsageIncrementor(IsolatedAsyncioTestCase):
     @patch("app.authentication.api_usage.redis_api_usage_incrementor.get_api_key_with_time")
     @patch.object(ConfigFileParser, 'get_config_section')
-    async def test_increment_when_key_doesnt_exists_should_call_set_key_value_with_expiry_time_once(self, 
-                                                                                                    mock_config_section,                                             
+    async def test_increment_when_key_doesnt_exists_should_call_set_key_value_with_expiry_time_once(self,
+                                                                                                    mock_config_section,
                                                                                                     mock_get_api_key_with_time):
-        api_key = "123abc"                                                                                                   
+        api_key = "123abc"
         mock_get_api_key_with_time.return_value = f"{api_key}:2"
         mock_config_section.return_value = {"second": 60}
 
@@ -30,10 +30,10 @@ class TestRedisApiUsageIncrementor(IsolatedAsyncioTestCase):
 
     @patch("app.authentication.api_usage.redis_api_usage_incrementor.get_api_key_with_time")
     @patch.object(ConfigFileParser, 'get_config_section')
-    async def test_increment_when_key_exists_should_call_increment_value_by_key_once(self, 
-                                                                                    mock_config_section,                                             
+    async def test_increment_when_key_exists_should_call_increment_value_by_key_once(self,
+                                                                                    mock_config_section,
                                                                                     mock_get_api_key_with_time):
-        api_key = "123abc"                                                                                                   
+        api_key = "123abc"
         mock_get_api_key_with_time.return_value = f"{api_key}:2"
         mock_config_section.return_value = {"second": 60}
 
