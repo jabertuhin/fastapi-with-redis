@@ -11,22 +11,23 @@ logger = logging.getLogger(__name__)
 class RedisConnector(Connector):
     def __init__(self) -> None:
         super().__init__()
-        self._host = ConfigFileParser.get_config_section("redis")["host"]        
+        self._host = ConfigFileParser.get_config_section("redis")["host"]
         self._port = ConfigFileParser.get_config_section("redis")["port"]
         self._db_index = int(ConfigFileParser.get_config_section("redis")["db_index"])
+        self._address = f"{self._host}:{self._port}/{self._db_index}"
 
     async def __aenter__(self):
         try:
             logger.debug(f"Connecting to Redis server, host: {self._host}")
-            self.redis = await aioredis.create_redis_pool(f"{self._host}:{self._port}/{self._db_index}", encoding="utf-8")
+            self.redis = await aioredis.create_redis_pool(self._address, encoding="utf-8")
             return self.redis
         except Exception as exp:
             logger.exception(exp)
             raise ServiceException()
 
-    async def __aexit__(self, exc_type, exc_value, exc_tb):
+    async def __aexit__(self, exc_type, exc_value, exc_tb) -> None:
         try:
-            logger.debug(f"Closing Redis server connection.")
+            logger.debug("Closing Redis server connection.")
             self.redis.close()
             await self.redis.wait_closed()
         except Exception as exp:
